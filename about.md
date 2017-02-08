@@ -10,9 +10,10 @@ Powered by [Jekyll](https://jekyllrb.com/docs/) and [Github pages](https://pages
 Welcome to contribute to it (either in Chinese or English). 
 A brief way to achieve it:
 
-1. run `git clone git@github.com:yydzero/yydzero.github.io.git`
-2. add a new post by writing a new file under *_posts/* dir
-3. git push with a short comment (with author names in both comments and posts)
+1. join the [hawq-cn](https://github.com/hawq-cn) organization
+2. run `git clone git@github.com:hawq-cn/hawq-cn.github.io.git`
+3. add a new post by writing a new file under *_posts/* dir
+4. git push with a short comment (with author names in both comments and posts)
 
 You can find out more info about the developing of HAWQ at
 
