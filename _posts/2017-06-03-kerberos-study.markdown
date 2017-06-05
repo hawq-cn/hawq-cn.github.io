@@ -24,7 +24,7 @@ published: true
 * 一个帐号下的kinit是否可以init多个CPN？
   * 不能，后一个会destroy之前的CPN
   * 如果有此类需求，可以考虑使用区分cache文件并设置KRB5CCNAME环境变量，举例
-  ```
+```
 [root@test1 gpadmin]# klist
 Ticket cache: FILE:/tmp/krb5cc_0
 Default principal: rangerlookup@HAWQ.PIVOTAL.COM
@@ -37,7 +37,7 @@ Default principal: spnego@HAWQ.PIVOTAL.COM
 Valid starting     Expires            Service principal
 05/31/17 01:08:14  06/01/17 01:08:14  krbtgt/HAWQ.PIVOTAL.COM@HAWQ.PIVOTAL.COM
      renew until 05/31/17 01:08:14
-  ```
+```
 * code
   * java中的JDBC
     * 连接字符串中写明了CPN和SPN，可以参考[HDB Doc](http://hdb.docs.pivotal.io/220/hawq/clientaccess/kerberos.html#topic9)
