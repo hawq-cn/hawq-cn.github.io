@@ -12,7 +12,7 @@ published: true
 总结一下最近项目中学习到的kerberos知识，尚未实验确认的标明*guessed*
 
 ### 基础
-先看这篇文章：http://www.tuicool.com/articles/6j2uQn ，简单来说：CPN(client principal)拿着一个可以长期访问SPN（server principal）的ticket，server通过这个ticket来完成对client的身份认证。
+先看[这篇文章](http://www.tuicool.com/articles/6j2uQn) ，简单来说：CPN(client principal)拿着一个可以长期访问SPN（server principal）的ticket，server通过这个ticket来完成对client的身份认证。
 
 ### tips
 * kerberos只负责认证，一定要**明确CPN和SPN**
@@ -23,7 +23,7 @@ published: true
   * 留意FQDN，要写对服务地址，否则可能出现checksum error
 * 一个帐号下的kinit是否可以init多个CPN？
   * 不能，后一个会destroy之前的CPN
-  * 如果有此类需求，可以考虑使用区分cache文件并设置KRB5CCNAME环境变量，举例
+  * 如果有此类需求，可以考虑使用区分ccache文件并设置KRB5CCNAME环境变量，举例
 ```
 [root@test1 gpadmin]# klist
 Ticket cache: FILE:/tmp/krb5cc_0
@@ -48,6 +48,7 @@ Valid starting     Expires            Service principal
   * C中用krb5-devel，核心是下边2个函数
     * [krb5_recvauth](https://web.mit.edu/Kerberos/krb5-devel/doc/appdev/refs/api/krb5_recvauth.html)
     * [krb5_sendauth](https://web.mit.edu/Kerberos/krb5-devel/doc/appdev/refs/api/krb5_sendauth.html)
+  * C中也可以用libgsasl，不过网上例子很少，可以参考libhdfs3  
 * 更多tips，见reference
 
 ### in HAWQ
@@ -58,7 +59,10 @@ Valid starting     Expires            Service principal
     * 打开pg_hda.conf支持（gss method）
     * create role以授权
   * CPN**只能**使用kinit指定，krb5_sendauth有个参数指定它
-  * libhdfs和libyarn TODO
+  * libhdfs
+    * 使用了libgsasl，kinit好之后再访问hdfs
+    * 与namenode交互：可以全程使用kerberos，也可以通过kerberos认证后，获取delegation token再继续访问（性能更好，避免再和KDC交互了）
+  * libyarn TODO
 * RPS
   * RPS->ranger admin: CPN在rps.properties中配置，通过spnego访问ranger secure webservice
   * ranger lookup->HAWQ: 使用JDBC
