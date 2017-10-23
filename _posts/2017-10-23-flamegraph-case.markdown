@@ -62,11 +62,11 @@ ParquetColumnReader_readValue(
 
 然后又做了几次实验：
 
-1. inline consume()
+#### inline consume()
 
 ![image]({{ site.url }}/assets/images/q6-2.png)
 
-2. 去掉执行不到的各个if条件，修改函数内容为：
+#### 去掉执行不到的各个if条件，修改函数内容为：
 
 ```
 void
@@ -83,7 +83,8 @@ ParquetColumnReader_readValue(
 
 ![image]({{ site.url }}/assets/images/q6-3.png)
 
-3. 数据对比：10.27%->9.06%->6.89%
+#### 数据对比：
+10.27%->9.06%->6.89%
 
 ### 结论
 * 调用多的函数会放大简单操作的时间消耗=>产生差
